@@ -1,6 +1,6 @@
 " Vim plugin for visual rcsdiff
 " Last Change: 2002 Jul 22
-" Maintainer:  Brian Nelson <bcnelson@imcglobal.com>
+" Maintainer:  Brian Nelson <nelsonbc@gmail.com>
 " Requires:    Vim 6.x w/ +diff feature
 " Documentation:
 " Integrates Vim's diffsplit functionality with RCS (Revision Control System).
