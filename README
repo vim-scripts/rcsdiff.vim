@@ -1,0 +1,23 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=360
+
+This script will create a new command, 'Rcsdiff'.
+
+NAME
+        Rcsdiff - Compare RCS revisions to current working file.
+
+SYNOPSIS
+        :Rcsdiff [rev]
+
+ARGUMENT
+        rev - Revision number. [Optional]
+ 
+DESCRIPTION
+        Display a diff comparison of the current working file and its
+        RCS (Revision Control System) revision.
+
+        An optional argument is provided to compare a specific revision.
+        If omitted, the latest revision will be used. This is useful for
+        determining changes since the last checkin.
+
+NOTES
+        See the rcsdiff script for more documentation and mappings.
