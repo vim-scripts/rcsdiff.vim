@@ -1,23 +1,22 @@
 " Vim plugin for visual rcsdiff
-" Last Change: 2002 Jul 22
+" Last Change: $Date: 2005/09/30 17:26:30 $
 " Maintainer:  Brian Nelson <nelsonbc@gmail.com>
 " Requires:    Vim 6.x w/ +diff feature
 " Documentation:
 " Integrates Vim's diffsplit functionality with RCS (Revision Control System).
-" With RCS managed files, compare the difference between the current
-" workfile and its revisions.
+" Compare the difference between the current workfile and its RCS revisions.
 " Commands:
 " :Rcsdiff [rev]
 "        Includes an optional revision argument. If argument is ommitted,
 "        the latest revision will be used.
 " Mappings:
-" <Leader>rcsdiff    or    <Plug>Rcsdiff
+" <Plug>Rcsdiff
 "        Show difference between current workfile and latest revision.
 " Instructions:
 " * Copy this file to your global plugin directory: i.e. ~/.vim/plugin
 " * The RCS checkout utility, 'co', must be on your path. 
-" * Optionally create your own mapping in ~/.vimrc.
-"        "map <F9> <Plug>Rcsdiff"
+" * Optionally, create your own mapping in ~/.vimrc.
+"   ex.    "map <F9> <Plug>Rcsdiff"
 " See Also:
 " Vim's diff documentation ":help diff.txt"
 " RCS manpages "man rcs", "man rcsintro"
@@ -29,10 +28,6 @@ if exists("loaded_rcsdiff")
 	finish
 endif
 let loaded_rcsdiff = 1
-
-if !hasmapto('<Plug>Rcsdiff')
-	map <unique> <Leader>rcsdiff <Plug>Rcsdiff
-endif
 
 noremap <unique> <script> <Plug>Rcsdiff :call <SID>RcsDiff()<CR>
 
@@ -53,8 +48,13 @@ function! s:RcsDiff(...)
 	let cmd = "co -p" . rev . " " . bufname("%") . " > " . tmpfile
 	let cmd_output = system(cmd)
 
-	if v:shell_error && cmd_output != ""
-		echohl WarningMsg | echon cmd_output | echohl None
+	if v:shell_error 
+		if cmd_output != ""
+			echohl WarningMsg | echon cmd_output | echohl None
+		else
+			echohl ErrorMsg | echon "Rcsdiff: command failed" | echohl None
+		endif
+
 		return
 	endif
 
